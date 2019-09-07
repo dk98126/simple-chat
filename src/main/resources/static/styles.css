@@ -1,0 +1,30 @@
+h1{
+    margin: auto;
+    width: 50%;
+    border: 3px solid seagreen;
+    background-color:  aquamarine;
+    color: indianred;
+    padding: 10px;
+    text-align: center;
+}
+#registrationForm{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+#registrationTable{
+    margin: auto;
+}
+.form-submit-button{
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    background-color: darkgreen;
+    color: white;
+    border-right-color: seagreen;
+    border-bottom-color: seagreen;
+    border-left-color: darkseagreen;
+    border-top-color: darkseagreen;
+    cursor: pointer;
+}
