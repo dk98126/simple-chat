@@ -16,6 +16,13 @@ public class HomeController {
         this.registrationChatService = registrationChatService;
     }
 
+    private WebUserRepo webUserRepo;
+
+    @Autowired
+    public void setWebUserRepo(WebUserRepo webUserRepo) {
+        this.webUserRepo = webUserRepo;
+    }
+
     @RequestMapping("/")
     public String home() {
         return "home.html";
@@ -23,10 +30,14 @@ public class HomeController {
 
     @RequestMapping("/registrationResult")
     @ResponseBody
-    public String sayHi(@RequestParam("email") String email,
+    public String sayHi(@RequestParam("firstName") String firstName,
+                        @RequestParam("lastName") String lastName,
+                        @RequestParam("email") String email,
                         @RequestParam("login") String login,
                         @RequestParam("password") String password) {
         try {
+            registrationChatService.checkIfStringIsBlank(firstName, "Имя");
+            registrationChatService.checkIfStringIsBlank(lastName, "Фамилия");
             registrationChatService.checkIfStringIsBlank(email, "Электронный адрес");
             registrationChatService.checkIfStringIsBlank(login, "Логин");
             registrationChatService.checkIfStringIsBlank(password, "Пароль");
@@ -35,6 +46,13 @@ public class HomeController {
             return e.getMessage();
         }
 
-        return "Вы успешно зарегистрироваись на нашем сайте!";
+        WebUser user = new WebUser(login, email, password, firstName, lastName);
+        if (webUserRepo.findByLogin(user.getLogin()).isEmpty()) {
+            webUserRepo.save(user);
+            return "Вы успешно зарегистрироваись на нашем сайте!";
+        }
+        else {
+            return "Пользователь с логином " + login + " уже существует!";
+        }
     }
 }
