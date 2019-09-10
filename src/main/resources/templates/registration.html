@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org" lang="ru">
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+        lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/registration-page.css">
     <title>Title</title>
 </head>
 <body>
 <h1>Страница регистрации</h1>
-<form action="/registrationResult" id="registrationForm">
+<form th:action="@{/registration}" method="post" id="registrationForm">
     <table id="registrationTable">
         <tr>
             <th>Имя:</th>
@@ -32,7 +34,7 @@
         <tr>
             <th>Логин:</th>
             <th>
-                <label> <input type="text" name="login"> </label>
+                <label> <input type="text" name="username"> </label>
             </th>
         </tr>
         <tr>
@@ -43,6 +45,10 @@
         </tr>
     </table>
     <input class="form-submit-button" type="submit" value="Зарегистрироваться">
+    <div th:if="${registrationError}!=null">
+        <p th:text="${registrationError}"></p>
+    </div>
 </form>
+<a href="/login">Есть аккаунт? Войти</a>
 </body>
 </html>

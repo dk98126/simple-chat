@@ -1,4 +1,4 @@
-package org.dk98126.communication.simplechat;
+package org.dk98126.communication.simplechat.service;
 
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class RegistrationChatService implements ChatService {
      * @param purpose назначение строки, чтобы правильно сформировать exception
      * @throws IllegalArgumentException выбрасывается, если строка пустая (сообщение содержит назначение строки)
      */
-    void checkIfStringIsBlank(String string, String purpose) throws IllegalArgumentException {
+    public void checkIfStringIsBlank(String string, String purpose) throws IllegalArgumentException {
         if (string.isBlank()) {
             throw new IllegalArgumentException(purpose + "не может быть пустым!");
         }
@@ -27,7 +27,7 @@ public class RegistrationChatService implements ChatService {
      * @param password строка, представляющая пароль
      * @throws IllegalArgumentException выбрасывается, если пароль не удовлетворил одному из условий
      */
-    void checkPassword(String password) throws IllegalArgumentException {
+    public void checkPassword(String password) throws IllegalArgumentException {
         if (password.chars()
                 .filter(Character::isLetter)
                 .map(Character::toUpperCase)
