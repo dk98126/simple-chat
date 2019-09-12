@@ -24,9 +24,9 @@ public class MessageController {
     }
 
     @PostMapping("/messages")
-    public String add(@RequestParam String text,
-                      @RequestParam String tag,
-                      Map<String, Object> model){
+    public String addMessage(@RequestParam String text,
+                             @RequestParam String tag,
+                             Map<String, Object> model){
 
         Message message = new Message(text, tag);
         messagesRepo.save(message);
