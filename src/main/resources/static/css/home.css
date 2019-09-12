@@ -23,14 +23,14 @@
     text-align: center;
     background: #5FA819;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 16px;
     display: inline-block;
     border: none;
     transition: all 0.2s ease 0s;
 }
 .ui-button:hover {
-    background-color: #bd0000;
-    letter-spacing: 1px;
+    background-color: #79BD52;
+    letter-spacing: 2px;
     -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     transition: all 0.2s ease 0s;
