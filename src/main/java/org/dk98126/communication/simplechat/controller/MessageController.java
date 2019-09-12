@@ -37,19 +37,4 @@ public class MessageController {
         return "messages";
     }
 
-    @PostMapping("filter")
-    public String filter(@RequestParam String filter, Map<String, Object> model) {
-        Iterable<Message> messagesIterable;
-
-        if (filter != null && !filter.isEmpty()) {
-            messagesIterable = messagesRepo.findByTag(filter);
-        } else {
-            messagesIterable = messagesRepo.findAll();
-        }
-
-        model.put("messagesIterable", messagesIterable);
-
-        return "messages";
-    }
-
 }
