@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/home.css">
     <title>Добро пожаловать!</title>
 </head>
 <body>
-<a href="/login">войти</a>
-<br>
-<a href="/registration">регистрация</a>
-<br>
-<a href="/user">личный кабинет</a>
+<img id="apple-logo" src="images/apple_logo.png" alt="яблоко">
+<div class="click-option">
+    <a class="ui-button" href="/login">войти</a>
+    <a class="ui-button" href="/registration">регистрация</a>
+    <a class="ui-button" href="/user">личный кабинет</a>
+</div>
 </body>
 </html>

@@ -5,8 +5,6 @@ import org.dk98126.communication.simplechat.user.WebUser;
 import org.dk98126.communication.simplechat.repository.WebUserRepo;
 import org.dk98126.communication.simplechat.user.WebUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
