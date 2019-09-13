@@ -1,1 +1,3 @@
 rootProject.name = 'simplechat'
+include 'backend'
+include 'frontend'

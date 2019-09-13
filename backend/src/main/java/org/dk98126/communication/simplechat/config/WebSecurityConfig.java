@@ -1,6 +1,5 @@
 package org.dk98126.communication.simplechat.config;
 
-import org.dk98126.communication.simplechat.repository.WebUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
