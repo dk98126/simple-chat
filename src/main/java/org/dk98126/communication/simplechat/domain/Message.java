@@ -2,6 +2,7 @@ package org.dk98126.communication.simplechat.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.dk98126.communication.simplechat.user.WebUser;
 
 import javax.persistence.*;
 
@@ -18,7 +19,16 @@ public class Message {
     private String text;
     private String tag;
 
-    public Message(String text, String tag) {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "web_user_id")
+    private WebUser author;
+
+    public String getAuthorName(){
+        return author != null ? author.getUsername() : "Don't know";
+    }
+
+    public Message(String text, String tag, WebUser webUser) {
+        this.author = webUser;
         this.text = text;
         this.tag = tag;
     }

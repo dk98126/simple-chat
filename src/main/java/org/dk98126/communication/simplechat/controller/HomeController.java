@@ -72,11 +72,11 @@ public class HomeController {
         WebUser user = new WebUser(username, email, password, firstName, lastName);
         user.setActive(true);
         user.setRoles(Set.of(WebUserRole.USER));
-        if (!webUserRepo.findByUsername(user.getUsername()).isEmpty()) {
+        if (webUserRepo.findByUsername(user.getUsername()) != null) {
             model.addAttribute("registrationError",
                     "Пользователь с логином " + user.getUsername() + " уже существует!");
             return "registration";
-        } else if (!webUserRepo.findByEmail(user.getEmail()).isEmpty()) {
+        } else if (webUserRepo.findByEmail(user.getEmail()) != null) {
             model.addAttribute( "registrationError",
                     "Пользователь с электронной почтой " + user.getEmail() + " уже существует!");
             return "registration";
