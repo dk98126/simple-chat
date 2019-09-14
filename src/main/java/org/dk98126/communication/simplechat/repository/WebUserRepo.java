@@ -8,6 +8,6 @@ import java.util.List;
 
 @RepositoryDefinition(idClass = Long.class, domainClass = WebUser.class)
 public interface WebUserRepo extends JpaRepository<WebUser, Long> {
-    List<WebUser> findByUsername(String login);
-    List<WebUser> findByEmail(String email);
+    WebUser findByUsername(String login);
+    WebUser findByEmail(String email);
 }
