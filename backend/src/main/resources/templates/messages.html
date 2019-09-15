@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Сообщения</title>
+    <link rel="stylesheet" href="/css/messages.css">
+</head>
+<body>
+<div>
+    <form action="/messages" method="post" style="text-align: center">
+        <label>Сообщение:
+            <input type="text" name="text" placeholder="введите сообщение"/>
+        </label>
+        <label>Тэг:
+            <input type="text" name="tag" placeholder="введите тег">
+        </label>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+<h3 style="text-align: center">Список сообщений</h3>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <tr>
+            <td style="font-weight: bold">ID</td>
+            <td style="font-weight: bold">Текст</td>
+            <td style="font-weight: bold">Тэг</td>
+            <td style="font-weight: bold">Автор</td>
+        </tr>
+        <th:block th:each="message : ${messages}">
+            <tr>
+                <td th:text="${message.getId()}"></td>
+                <td th:text="${message.getText()}"></td>
+                <td th:text="${message.getTag()}"></td>
+                <td th:text="${message.getAuthorName()}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>
