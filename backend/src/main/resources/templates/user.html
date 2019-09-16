@@ -10,6 +10,10 @@
 <body>
     Добро пожаловать в личный кабинет!
     <br>
-    <a href="/">на главную</a>
+    <a href="/messages">Перейти к сообщениям</a>
+    <form th:action="@{/logout}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <button type="submit">Выйти из аккаунта</button>
+    </form>
 </body>
 </html>

@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="/css/messages.css">
 </head>
 <body>
+<a href="/user">Перейти в ЛК</a>
+<form th:action="@{/logout}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <button type="submit">Выйти из аккаунта</button>
+</form>
 <div>
     <form action="/messages" method="post" style="text-align: center">
         <label>Сообщение:
