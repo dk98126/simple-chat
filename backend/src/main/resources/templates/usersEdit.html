@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Edit Info</title>
+</head>
+<body>
+<form action="/admin" method="post">
+    <input type="text" value="webUser.getUsername()" name="username">
+    <select>
+        <option th:each="webUserRole : roles">
+        </option>
+    </select>
+    <input type="hidden" th:value="${_csrf.token}" th:name="${_csrf.parameterName}">
+    <input type="hidden" th:value="webUser.getId()" name="webUserId">
+</form>
+</body>
+</html>

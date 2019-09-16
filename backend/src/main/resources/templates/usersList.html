@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+</head>
+<body>
+<h3 style="text-align: center">Список сообщений</h3>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <tr>
+            <td style="font-weight: bold">Пользователь</td>
+            <td style="font-weight: bold">Роль</td>
+            <td></td>
+        </tr>
+        <th:block th:each="webUser : ${usersList}">
+            <td>
+                <td th:text="${webUser.getUsername()}"></td>
+                <td th:text="${webUser.getRoles()}"></td>
+                <td> <a th:href="@{'/admin/' + ${webUser.getId()}}">view</a></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>
