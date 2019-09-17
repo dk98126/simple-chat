@@ -18,19 +18,17 @@ public class MessageController {
     private MessagesRepo messagesRepo;
 
     @GetMapping("/messages")
-    public String messages(Model model){
+    public String messages(Model model) {
         Iterable<Message> messages = messagesRepo.findAll();
         model.addAttribute("messages", messages);
         return "messages";
     }
 
     @PostMapping("/messages")
-    public String addMessage(
-            @AuthenticationPrincipal WebUser webUser,
-            @RequestParam String text,
-            @RequestParam String tag,
-            Model model)
-    {
+    public String addMessage(@AuthenticationPrincipal WebUser webUser,
+                             @RequestParam String text,
+                             @RequestParam String tag,
+                             Model model) {
         Message message = new Message(text, tag, webUser);
         messagesRepo.save(message);
 

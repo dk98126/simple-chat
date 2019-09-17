@@ -1,17 +1,20 @@
 package org.dk98126.communication.simplechat.controller;
 
+import org.dk98126.communication.simplechat.repository.WebUserRepo;
 import org.dk98126.communication.simplechat.service.RegistrationChatService;
 import org.dk98126.communication.simplechat.user.WebUser;
-import org.dk98126.communication.simplechat.repository.WebUserRepo;
 import org.dk98126.communication.simplechat.user.WebUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Set;
 
@@ -43,13 +46,13 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if (!(auth instanceof AnonymousAuthenticationToken))
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
             return "redirect:/user";
-        else
+        } else
             return "login";
     }
 
@@ -59,8 +62,19 @@ public class HomeController {
     }
 
     @RequestMapping("/user")
-    public String userView() {
-        return "user";
+    public String userView(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            //FIXME не обращаться каждый раз к базе при переходе на эту страницу, а брать данные из сессии
+            Object principal = auth.getPrincipal();
+            if (principal instanceof UserDetails) {
+                WebUser webUser = webUserRepo.findByUsername(((UserDetails) principal).getUsername());
+                model.addAttribute("webUser", webUser);
+            }
+            return "user";
+        } else {
+            return "redirect:/registration";
+        }
     }
 
     @PostMapping("/registration")
@@ -90,7 +104,7 @@ public class HomeController {
                     "Пользователь с логином " + user.getUsername() + " уже существует!");
             return "registration";
         } else if (webUserRepo.findByEmail(user.getEmail()) != null) {
-            model.addAttribute( "registrationError",
+            model.addAttribute("registrationError",
                     "Пользователь с электронной почтой " + user.getEmail() + " уже существует!");
             return "registration";
         } else {

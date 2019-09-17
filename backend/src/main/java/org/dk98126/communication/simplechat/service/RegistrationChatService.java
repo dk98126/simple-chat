@@ -12,7 +12,8 @@ public class RegistrationChatService implements ChatService {
 
     /**
      * Проверка строки на пустоту
-     * @param string строка (может быть паролем, email и т.д.)
+     *
+     * @param string  строка (может быть паролем, email и т.д.)
      * @param purpose назначение строки, чтобы правильно сформировать exception
      * @throws IllegalArgumentException выбрасывается, если строка пустая (сообщение содержит назначение строки)
      */
@@ -24,6 +25,7 @@ public class RegistrationChatService implements ChatService {
 
     /**
      * Проврка пароля на некоторые условия
+     *
      * @param password строка, представляющая пароль
      * @throws IllegalArgumentException выбрасывается, если пароль не удовлетворил одному из условий
      */
