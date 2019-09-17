@@ -34,10 +34,10 @@
         </tr>
         <th:block th:each="message : ${messages}">
             <tr>
-                <td th:text="${message.getId()}"></td>
-                <td th:text="${message.getText()}"></td>
-                <td th:text="${message.getTag()}"></td>
-                <td th:text="${message.getAuthorName()}"></td>
+                <td th:text="${message.getId()}">id</td>
+                <td th:text="${message.getText()}">текст</td>
+                <td th:text="${message.getTag()}">тэг</td>
+                <td th:text="${message.getAuthorName()}">автор</td>
             </tr>
         </th:block>
     </table>

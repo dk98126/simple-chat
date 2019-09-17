@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Admin Edit Info</title>
 </head>
 <body>
-<form action="/admin" method="post">
-    <input type="text" value="webUser.getUsername()" name="username">
-    <select>
-        <option th:each="webUserRole : roles">
-        </option>
-    </select>
+<form method="post">
+    <label>
+        Логин: <input type="text" th:value="${webUser.username}" name="username">
+    </label>
+    <label>Роли:
+        <select name="role">
+            <th:block th:each="role : ${roles}">
+                <option th:text="${role}">роль</option>>
+            </th:block>
+        </select>
+    </label>
+    <th:block th:if="${registrationError} != null">
+        <p th:text="${registrationError}">сообщение об ошибке</p>
+    </th:block>
+    <br>
     <input type="hidden" th:value="${_csrf.token}" th:name="${_csrf.parameterName}">
-    <input type="hidden" th:value="webUser.getId()" name="webUserId">
+    <input type="submit" value="Сохранить изменения">
 </form>
 </body>
 </html>
