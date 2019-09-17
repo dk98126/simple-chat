@@ -46,7 +46,7 @@
     </table>
     <input class="form-submit-button" type="submit" value="Зарегистрироваться">
     <div th:if="${registrationError}!=null">
-        <p th:text="${registrationError}"></p>
+        <p th:text="${registrationError}">Ошибка регистрации</p>
     </div>
 </form>
 <a href="/login">Есть аккаунт? Войти</a>

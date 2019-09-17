@@ -27,6 +27,7 @@
     display: inline-block;
     border: none;
     transition: all 0.2s ease 0s;
+    cursor: pointer;
 }
 .ui-button:hover {
     background-color: #79BD52;

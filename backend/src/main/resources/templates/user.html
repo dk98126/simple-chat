@@ -5,11 +5,27 @@
       lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="css/home.css">
     <title>Личный кабинет</title>
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            let form = document.getElementById("logout-form");
+
+            document.getElementById("submitting-button").addEventListener("click", function () {
+                form.submit();
+            });
+        });
+    </script>
 </head>
 <body>
+<div class="header" th:text="'Добро пожаловать в личный кабинет, ' + ${webUser.firstName} + '!'">
     Добро пожаловать в личный кабинет!
-    <br>
-    <a href="/">на главную</a>
+</div>
+<form class="click-option" style="width: 250px" th:action="@{/logout}" method="post" id="logout-form">
+    <a class="ui-button" href="/messages">Перейти к сообщениям</a>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <a id="submitting-button" class="ui-button">выйти</a>
+</form>
 </body>
 </html>
