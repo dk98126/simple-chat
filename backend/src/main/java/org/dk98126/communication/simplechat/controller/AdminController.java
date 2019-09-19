@@ -5,6 +5,7 @@ import org.dk98126.communication.simplechat.service.RegistrationChatService;
 import org.dk98126.communication.simplechat.user.WebUser;
 import org.dk98126.communication.simplechat.user.WebUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.HashSet;
 
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
 
     private WebUserRepo webUserRepo;
@@ -46,7 +48,8 @@ public class AdminController {
     @PostMapping("{webUser}")
     public String changeUserInfo(@PathVariable WebUser webUser,
                                  @RequestParam(name = "username") String username,
-                                 @RequestParam(name = "roles") HashSet<WebUserRole> roles,
+                                 @RequestParam(name = "roles", defaultValue = "") HashSet<WebUserRole> roles,
+                                 @RequestParam(name = "active", defaultValue = "false") boolean active,
                                  Model model)
     {
         try {
@@ -60,8 +63,14 @@ public class AdminController {
                     "уже сущестует");
             return webUsersEdit(webUser, model);
         }
+        if (roles.isEmpty()) {
+            model.addAttribute("registrationError", "У пользователя должна быть хотя бы " +
+                    "одна роль");
+            return webUsersEdit(webUser, model);
+        }
         webUser.setUsername(username);
         webUser.setRoles(roles);
+        webUser.setActive(active);
         webUserRepo.save(webUser);
         return "redirect:/admin";
     }

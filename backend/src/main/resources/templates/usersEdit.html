@@ -13,11 +13,15 @@
     </label>
     <label>Роли:
         <div th:each="role : ${roles}">
-            <label th:for="${role}" th:value="${role}">
+            <label>
                 <span th:text="${role}">role</span>
                 <input type="checkbox" th:value="${role}" th:field="*{roles}"/>
             </label>
         </div>
+    </label>
+    <label>
+        <span>Актив?</span>
+        <input type="checkbox" value="active" th:field="*{active}"/>
     </label>
     <th:block th:if="${registrationError} != null">
         <p th:text="${registrationError}">сообщение об ошибке</p>
