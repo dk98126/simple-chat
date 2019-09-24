@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,13 @@ public class HomeController {
         this.webUserRepo = webUserRepo;
     }
 
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @GetMapping("/registration")
     public String showRegistrationPage() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -46,7 +54,7 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -96,7 +104,7 @@ public class HomeController {
             return "registration";
         }
 
-        WebUser user = new WebUser(username, email, password, firstName, lastName);
+        WebUser user = new WebUser(username, email, passwordEncoder.encode(password), firstName, lastName);
         user.setActive(true);
         user.setRoles(Set.of(WebUserRole.USER));
         if (webUserRepo.findByUsername(user.getUsername()) != null) {
