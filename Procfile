@@ -1,1 +1,1 @@
-web: java -jar backend/build/libs/backend-0.0.1-SNAPSHOT.jar
+web: java -jar --server.port=8080 backend/build/libs/backend-0.0.1-SNAPSHOT.jar
