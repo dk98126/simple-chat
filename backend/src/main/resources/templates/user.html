@@ -24,6 +24,9 @@
 </div>
 <form class="click-option" style="width: 250px" th:action="@{/logout}" method="post" id="logout-form">
     <a class="ui-button" href="/messages">Перейти к сообщениям</a>
+    <th:block th:if="${webUser.isAdmin()}">
+        <a class="ui-button" href="/admin">Админка</a>
+    </th:block>
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <a id="submitting-button" class="ui-button">выйти</a>
 </form>

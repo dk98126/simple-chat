@@ -38,6 +38,10 @@ public class WebUser implements UserDetails {
         this.lastName = lastName;
     }
 
+    public boolean isAdmin() {
+        return roles.contains(WebUserRole.ADMIN);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
