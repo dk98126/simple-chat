@@ -1,5 +1,6 @@
 package org.dk98126.communication.simplechat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class SpringBootJpaIntegrationTest {
      * Тем самым проверяется доступность БД, и что спринг правильно инжектит репозитории.
      */
     @Test
+    @Ignore
     public void givenGenericEntityRepositoryWhenSaveAndRetrieveEntityThenOK() {
         GenericEntity genericEntity = genericEntityRepository.save(new GenericEntity("test"));
         GenericEntity foundEntity = genericEntityRepository.findById(genericEntity.getId()).orElse(null);
