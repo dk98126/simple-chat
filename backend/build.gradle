@@ -6,7 +6,7 @@ plugins {
 
 group = 'org.dk98126.communication'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '12'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
